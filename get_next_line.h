@@ -16,7 +16,7 @@
 //define if not specified in the compiler command
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 32
 # endif
 
 # include <malloc.h>
