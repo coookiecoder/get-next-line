@@ -1,0 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                                            */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*                                                :#:  :#::#     #::#:  :#:   */
+/*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
+/*                                                :##::##: :#:#:#: :##::##:   */
+/*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
+/*   Updated: 2023/10/25 07:34:49 by abareux          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
+
+//define if not specified in the compiler command
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 32
+# endif
+
+# include <malloc.h>
+# include <unistd.h>
+
+char	*get_next_line(int fd);
+char	*ft_strchr(char *s, char c);
+char	*get_from_buffer(char buffer[BUFFER_SIZE + 1], char *result);
+
+#endif

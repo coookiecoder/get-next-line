@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                                            */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                :#:  :#::#     #::#:  :#:   */
 /*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
 /*                                                :##::##: :#:#:#: :##::##:   */
 /*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
-/*   Updated: 2023/10/25 07:31:41 by abareux          ###   ########.fr       */
+/*   Updated: 2023/10/25 07:33:25 by abareux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,26 @@ int	try_buffer_without_nl(char *buffer, char **result, int fd)
 
 char	*get_next_line(int fd)
 {
-	static char	buffer[BUFFER_SIZE + 1];
+	static char	buffer[1024][BUFFER_SIZE + 1];
 	char		*result;
 	int			buffer_result;
 
-	if (!try_buffer_without_nl(buffer, &result, fd))
+	if (!try_buffer_without_nl(buffer[fd], &result, fd))
 		return (result);
-	if (buffer[0] && ft_strchr(buffer, '\n'))
-		return (get_from_buffer(buffer, 0));
-	buffer_result = read(fd, buffer, BUFFER_SIZE);
+	if (buffer[fd][0] && ft_strchr(buffer[fd], '\n'))
+		return (get_from_buffer(buffer[fd], 0));
+	buffer_result = read(fd, buffer[fd], BUFFER_SIZE);
 	while (buffer_result > 0)
 	{
-		if (buffer[0] && ft_strchr(buffer, '\n'))
-			return (get_from_buffer(buffer, result));
-		if (buffer[0] && !ft_strchr(buffer, '\n'))
+		if (buffer[fd][0] && ft_strchr(buffer[fd], '\n'))
+			return (get_from_buffer(buffer[fd], result));
+		if (buffer[fd][0] && !ft_strchr(buffer[fd], '\n'))
 		{
-			result = get_from_buffer(buffer, result);
+			result = get_from_buffer(buffer[fd], result);
 			if (!result)
 				return (result);
 		}
-		buffer_result = read(fd, buffer, BUFFER_SIZE);
+		buffer_result = read(fd, buffer[fd], BUFFER_SIZE);
 	}
 	if (buffer_result)
 		return (free(result), NULL);
